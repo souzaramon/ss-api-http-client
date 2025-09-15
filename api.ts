@@ -107,12 +107,15 @@ export interface UtilApiError {
 export const AuthorsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Get a list of all authors
-         * @summary List all authors
+         * Create a new author
+         * @summary Create author
+         * @param {AuthorsCreateAuthorDto} data Author data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        create: async (data: AuthorsCreateAuthorDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'data' is not null or undefined
+            assertParamExists('create', 'data', data)
             const localVarPath = `/authors/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -121,15 +124,18 @@ export const AuthorsApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(data, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -143,9 +149,9 @@ export const AuthorsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorsIdDelete: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteById: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('authorsIdDelete', 'id', id)
+            assertParamExists('deleteById', 'id', id)
             const localVarPath = `/authors/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -171,15 +177,45 @@ export const AuthorsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Get a list of all authors
+         * @summary List all authors
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/authors/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieve a single author by their ID
          * @summary Get author by ID
          * @param {string} id Author ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getById: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('authorsIdGet', 'id', id)
+            assertParamExists('getById', 'id', id)
             const localVarPath = `/authors/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -212,11 +248,11 @@ export const AuthorsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorsIdPut: async (id: string, data: AuthorsUpdateAuthorDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateById: async (id: string, data: AuthorsUpdateAuthorDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('authorsIdPut', 'id', id)
+            assertParamExists('updateById', 'id', id)
             // verify required parameter 'data' is not null or undefined
-            assertParamExists('authorsIdPut', 'data', data)
+            assertParamExists('updateById', 'data', data)
             const localVarPath = `/authors/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -227,42 +263,6 @@ export const AuthorsApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(data, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Create a new author
-         * @summary Create author
-         * @param {AuthorsCreateAuthorDto} data Author data
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authorsPost: async (data: AuthorsCreateAuthorDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'data' is not null or undefined
-            assertParamExists('authorsPost', 'data', data)
-            const localVarPath = `/authors/`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -291,15 +291,16 @@ export const AuthorsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AuthorsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Get a list of all authors
-         * @summary List all authors
+         * Create a new author
+         * @summary Create author
+         * @param {AuthorsCreateAuthorDto} data Author data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authorsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AuthorsAuthor>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorsGet(options);
+        async create(data: AuthorsCreateAuthorDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthorsAuthor>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(data, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.authorsGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.create']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -309,10 +310,22 @@ export const AuthorsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authorsIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorsIdDelete(id, options);
+        async deleteById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteById(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.authorsIdDelete']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.deleteById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get a list of all authors
+         * @summary List all authors
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AuthorsAuthor>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.getAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -322,10 +335,10 @@ export const AuthorsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authorsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthorsAuthor>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorsIdGet(id, options);
+        async getById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthorsAuthor>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getById(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.authorsIdGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.getById']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -336,23 +349,10 @@ export const AuthorsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authorsIdPut(id: string, data: AuthorsUpdateAuthorDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthorsAuthor>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorsIdPut(id, data, options);
+        async updateById(id: string, data: AuthorsUpdateAuthorDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthorsAuthor>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateById(id, data, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.authorsIdPut']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Create a new author
-         * @summary Create author
-         * @param {AuthorsCreateAuthorDto} data Author data
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authorsPost(data: AuthorsCreateAuthorDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthorsAuthor>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorsPost(data, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.authorsPost']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthorsApi.updateById']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -366,13 +366,14 @@ export const AuthorsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = AuthorsApiFp(configuration)
     return {
         /**
-         * Get a list of all authors
-         * @summary List all authors
+         * Create a new author
+         * @summary Create author
+         * @param {AuthorsCreateAuthorDto} data Author data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorsGet(options?: RawAxiosRequestConfig): AxiosPromise<Array<AuthorsAuthor>> {
-            return localVarFp.authorsGet(options).then((request) => request(axios, basePath));
+        create(data: AuthorsCreateAuthorDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthorsAuthor> {
+            return localVarFp.create(data, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete an existing author by ID
@@ -381,8 +382,17 @@ export const AuthorsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorsIdDelete(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.authorsIdDelete(id, options).then((request) => request(axios, basePath));
+        deleteById(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a list of all authors
+         * @summary List all authors
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<AuthorsAuthor>> {
+            return localVarFp.getAll(options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a single author by their ID
@@ -391,8 +401,8 @@ export const AuthorsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorsIdGet(id: string, options?: RawAxiosRequestConfig): AxiosPromise<AuthorsAuthor> {
-            return localVarFp.authorsIdGet(id, options).then((request) => request(axios, basePath));
+        getById(id: string, options?: RawAxiosRequestConfig): AxiosPromise<AuthorsAuthor> {
+            return localVarFp.getById(id, options).then((request) => request(axios, basePath));
         },
         /**
          * Update an existing author by ID
@@ -402,18 +412,8 @@ export const AuthorsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorsIdPut(id: string, data: AuthorsUpdateAuthorDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthorsAuthor> {
-            return localVarFp.authorsIdPut(id, data, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Create a new author
-         * @summary Create author
-         * @param {AuthorsCreateAuthorDto} data Author data
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authorsPost(data: AuthorsCreateAuthorDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthorsAuthor> {
-            return localVarFp.authorsPost(data, options).then((request) => request(axios, basePath));
+        updateById(id: string, data: AuthorsUpdateAuthorDto, options?: RawAxiosRequestConfig): AxiosPromise<AuthorsAuthor> {
+            return localVarFp.updateById(id, data, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -426,14 +426,15 @@ export const AuthorsApiFactory = function (configuration?: Configuration, basePa
  */
 export class AuthorsApi extends BaseAPI {
     /**
-     * Get a list of all authors
-     * @summary List all authors
+     * Create a new author
+     * @summary Create author
+     * @param {AuthorsCreateAuthorDto} data Author data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthorsApi
      */
-    public authorsGet(options?: RawAxiosRequestConfig) {
-        return AuthorsApiFp(this.configuration).authorsGet(options).then((request) => request(this.axios, this.basePath));
+    public create(data: AuthorsCreateAuthorDto, options?: RawAxiosRequestConfig) {
+        return AuthorsApiFp(this.configuration).create(data, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -444,8 +445,19 @@ export class AuthorsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthorsApi
      */
-    public authorsIdDelete(id: string, options?: RawAxiosRequestConfig) {
-        return AuthorsApiFp(this.configuration).authorsIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    public deleteById(id: string, options?: RawAxiosRequestConfig) {
+        return AuthorsApiFp(this.configuration).deleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a list of all authors
+     * @summary List all authors
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthorsApi
+     */
+    public getAll(options?: RawAxiosRequestConfig) {
+        return AuthorsApiFp(this.configuration).getAll(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -456,8 +468,8 @@ export class AuthorsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthorsApi
      */
-    public authorsIdGet(id: string, options?: RawAxiosRequestConfig) {
-        return AuthorsApiFp(this.configuration).authorsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    public getById(id: string, options?: RawAxiosRequestConfig) {
+        return AuthorsApiFp(this.configuration).getById(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -469,20 +481,8 @@ export class AuthorsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthorsApi
      */
-    public authorsIdPut(id: string, data: AuthorsUpdateAuthorDto, options?: RawAxiosRequestConfig) {
-        return AuthorsApiFp(this.configuration).authorsIdPut(id, data, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Create a new author
-     * @summary Create author
-     * @param {AuthorsCreateAuthorDto} data Author data
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthorsApi
-     */
-    public authorsPost(data: AuthorsCreateAuthorDto, options?: RawAxiosRequestConfig) {
-        return AuthorsApiFp(this.configuration).authorsPost(data, options).then((request) => request(this.axios, this.basePath));
+    public updateById(id: string, data: AuthorsUpdateAuthorDto, options?: RawAxiosRequestConfig) {
+        return AuthorsApiFp(this.configuration).updateById(id, data, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
