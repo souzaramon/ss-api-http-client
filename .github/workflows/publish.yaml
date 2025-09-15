@@ -28,6 +28,6 @@ jobs:
           VERSION=${GITHUB_REF#refs/tags/v}
           npm version --no-git-tag-version $VERSION
 
-      - run: npm publish
+      - run: npm publish --access public
         env:
           AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
