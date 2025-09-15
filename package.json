@@ -1,0 +1,23 @@
+{
+  "name": "@souzaramon/ss-api-http-client",
+  "version": "0.0.0", 
+  "description": "Auto-generated TypeScript HTTP client for ss-api",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.12.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
