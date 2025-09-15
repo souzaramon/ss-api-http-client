@@ -1,0 +1,14 @@
+.gitignore
+.npmignore
+.openapi-generator-ignore
+api.ts
+base.ts
+common.ts
+configuration.ts
+docs/AuthorsApi.md
+docs/AuthorsAuthor.md
+docs/AuthorsCreateAuthorDto.md
+docs/AuthorsUpdateAuthorDto.md
+docs/UtilApiError.md
+git_push.sh
+index.ts
