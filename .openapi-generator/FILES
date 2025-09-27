@@ -8,6 +8,10 @@ docs/AuthorsApi.md
 docs/AuthorsAuthor.md
 docs/AuthorsCreateAuthorDto.md
 docs/AuthorsUpdateAuthorDto.md
+docs/TitlesApi.md
+docs/TitlesCreateTitleDto.md
+docs/TitlesTitle.md
+docs/TitlesUpdateTitleDto.md
 docs/UtilApiError.md
 git_push.sh
 index.ts

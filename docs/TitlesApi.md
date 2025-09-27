@@ -1,35 +1,35 @@
-# AuthorsApi
+# TitlesApi
 
 All URIs are relative to *http://localhost:8080/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createAuthor**](#createauthor) | **POST** /authors/ | Create author|
-|[**deleteAuthorById**](#deleteauthorbyid) | **DELETE** /authors/{id} | Delete author|
-|[**getAllAuthors**](#getallauthors) | **GET** /authors/ | List all authors|
-|[**getAuthorById**](#getauthorbyid) | **GET** /authors/{id} | Get author by ID|
-|[**updateAuthorById**](#updateauthorbyid) | **PUT** /authors/{id} | Update author|
+|[**createTitle**](#createtitle) | **POST** /titles/ | Create title|
+|[**deleteTitleById**](#deletetitlebyid) | **DELETE** /titles/{id} | Delete title|
+|[**getAllTitles**](#getalltitles) | **GET** /titles/ | List all titles|
+|[**getTitleById**](#gettitlebyid) | **GET** /titles/{id} | Get title by ID|
+|[**updateTitleById**](#updatetitlebyid) | **PUT** /titles/{id} | Update title|
 
-# **createAuthor**
-> AuthorsAuthor createAuthor(data)
+# **createTitle**
+> TitlesTitle createTitle(data)
 
-Create a new author
+Create a new title
 
 ### Example
 
 ```typescript
 import {
-    AuthorsApi,
+    TitlesApi,
     Configuration,
-    AuthorsCreateAuthorDto
+    TitlesCreateTitleDto
 } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new AuthorsApi(configuration);
+const apiInstance = new TitlesApi(configuration);
 
-let data: AuthorsCreateAuthorDto; //Author data
+let data: TitlesCreateTitleDto; //Title data
 
-const { status, data } = await apiInstance.createAuthor(
+const { status, data } = await apiInstance.createTitle(
     data
 );
 ```
@@ -38,12 +38,12 @@ const { status, data } = await apiInstance.createAuthor(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **data** | **AuthorsCreateAuthorDto**| Author data | |
+| **data** | **TitlesCreateTitleDto**| Title data | |
 
 
 ### Return type
 
-**AuthorsAuthor**
+**TitlesTitle**
 
 ### Authorization
 
@@ -64,25 +64,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deleteAuthorById**
-> deleteAuthorById()
+# **deleteTitleById**
+> deleteTitleById()
 
-Delete an existing author by ID
+Delete an existing title by ID
 
 ### Example
 
 ```typescript
 import {
-    AuthorsApi,
+    TitlesApi,
     Configuration
 } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new AuthorsApi(configuration);
+const apiInstance = new TitlesApi(configuration);
 
-let id: string; //Author ID (default to undefined)
+let id: string; //Title ID (default to undefined)
 
-const { status, data } = await apiInstance.deleteAuthorById(
+const { status, data } = await apiInstance.deleteTitleById(
     id
 );
 ```
@@ -91,7 +91,7 @@ const { status, data } = await apiInstance.deleteAuthorById(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | Author ID | defaults to undefined|
+| **id** | [**string**] | Title ID | defaults to undefined|
 
 
 ### Return type
@@ -116,23 +116,23 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAllAuthors**
-> Array<AuthorsAuthor> getAllAuthors()
+# **getAllTitles**
+> Array<TitlesTitle> getAllTitles()
 
-Get a list of all authors
+Get a list of all titles
 
 ### Example
 
 ```typescript
 import {
-    AuthorsApi,
+    TitlesApi,
     Configuration
 } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new AuthorsApi(configuration);
+const apiInstance = new TitlesApi(configuration);
 
-const { status, data } = await apiInstance.getAllAuthors();
+const { status, data } = await apiInstance.getAllTitles();
 ```
 
 ### Parameters
@@ -141,7 +141,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**Array<AuthorsAuthor>**
+**Array<TitlesTitle>**
 
 ### Authorization
 
@@ -161,25 +161,25 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAuthorById**
-> AuthorsAuthor getAuthorById()
+# **getTitleById**
+> TitlesTitle getTitleById()
 
-Retrieve a single author by their ID
+Retrieve a single title by their ID
 
 ### Example
 
 ```typescript
 import {
-    AuthorsApi,
+    TitlesApi,
     Configuration
 } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new AuthorsApi(configuration);
+const apiInstance = new TitlesApi(configuration);
 
-let id: string; //Author ID (default to undefined)
+let id: string; //Title ID (default to undefined)
 
-const { status, data } = await apiInstance.getAuthorById(
+const { status, data } = await apiInstance.getTitleById(
     id
 );
 ```
@@ -188,12 +188,12 @@ const { status, data } = await apiInstance.getAuthorById(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | Author ID | defaults to undefined|
+| **id** | [**string**] | Title ID | defaults to undefined|
 
 
 ### Return type
 
-**AuthorsAuthor**
+**TitlesTitle**
 
 ### Authorization
 
@@ -214,27 +214,27 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateAuthorById**
-> AuthorsAuthor updateAuthorById(data)
+# **updateTitleById**
+> TitlesTitle updateTitleById(data)
 
-Update an existing author by ID
+Update an existing title by ID
 
 ### Example
 
 ```typescript
 import {
-    AuthorsApi,
+    TitlesApi,
     Configuration,
-    AuthorsUpdateAuthorDto
+    TitlesUpdateTitleDto
 } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new AuthorsApi(configuration);
+const apiInstance = new TitlesApi(configuration);
 
-let id: string; //Author ID (default to undefined)
-let data: AuthorsUpdateAuthorDto; //Author data
+let id: string; //Title ID (default to undefined)
+let data: TitlesUpdateTitleDto; //Title data
 
-const { status, data } = await apiInstance.updateAuthorById(
+const { status, data } = await apiInstance.updateTitleById(
     id,
     data
 );
@@ -244,13 +244,13 @@ const { status, data } = await apiInstance.updateAuthorById(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **data** | **AuthorsUpdateAuthorDto**| Author data | |
-| **id** | [**string**] | Author ID | defaults to undefined|
+| **data** | **TitlesUpdateTitleDto**| Title data | |
+| **id** | [**string**] | Title ID | defaults to undefined|
 
 
 ### Return type
 
-**AuthorsAuthor**
+**TitlesTitle**
 
 ### Authorization
 
